@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :posts
+  # resources :posts
   # resources :users
   get '/', to: 'users#index'
   post '/users', to: 'users#create'
