@@ -9,15 +9,8 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-  end
-
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
+    user = User.find(session[:user_id])
+    render json: user, status: :ok
   end
 
   # POST /users or /users.json

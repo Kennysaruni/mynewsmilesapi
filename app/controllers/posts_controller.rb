@@ -32,7 +32,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
     post = Post.find(params[:id])
-    if post.update(post_params)
+    if post.update(post_params), status: :ok
       render json: post
     else
       render json: { error: "Failed to update post" }, status: :unprocessable_entity
