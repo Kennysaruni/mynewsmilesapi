@@ -31,24 +31,22 @@ class PostsController < ApplicationController
   end
   # PATCH/PUT /posts/1 or /posts/1.json
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to post_url(@post), notice: "Post was successfully updated." }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    post = Post.find(params[:id])
+    if post.update(post_params)
+      render json: post
+    else
+      render json: { error: "Failed to update post" }, status: :unprocessable_entity
     end
   end
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: "Post was successfully destroyed." }
-      format.json { head :no_content }
+    post = Post.find_by(id: params[:id])
+    if post
+      post.destroy
+      head :no_content
+    else
+      render json: {error: "Failed to delete"}, status: :not_found
     end
   end
 
