@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # resources :users
   get '/', to: 'users#index'
   post '/users', to: 'users#create'
-  get '/users:id', to: 'users#show'
+  get '/users/:id', to: 'users#show'
   ##Posts
   get '/posts', to: 'posts#index'
   post '/posts', to: 'posts#create'
