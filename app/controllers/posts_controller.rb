@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[ show edit update destroy ]
+  skip_before_action :authorize, only:[:index,:destroy,:create,:update]
 
   # GET /posts or /posts.json
   def index
@@ -9,6 +10,12 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    post = Post.find_by(id: params[:id])
+    if post
+      render json: post, status: :ok
+    else
+      render json: {error: "Post not found"}, status:404
+    end
   end
 
   # GET /posts/new
