@@ -26,15 +26,13 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+   user = User.find_by(id: params[:id])
+   if user.update(post_params)
+    render json: user, status: :ok
+   else
+    render json: {error: "Failed to update"}
+   end
+
   end
 
   # DELETE /users/1 or /users/1.json
