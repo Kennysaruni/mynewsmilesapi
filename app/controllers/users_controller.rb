@@ -45,7 +45,7 @@ class UsersController < ApplicationController
     head :no_content
   else
     render json: {error: "Failed to destroy user"}
-  ends
+  end
   end
 
   private
